@@ -18,7 +18,6 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage });
 
 let houses = [
-    
     {
         "_id":1,
         "name": "Farmhouse",
@@ -93,9 +92,14 @@ let houses = [
 ]
 
 app.get("/api/houses/", (req, res)=>{
-    console.log("in get request");
+    console.log("in get request")
     res.send(houses);
 });
+
+app.get("/api/houses/:id", (req, res) =>{
+    const house = houses.find((house)=>house._id === parseInt(req.params.id));
+    res.send(house);
+})
 
 app.listen(3001, () => {
     console.log("Server is up and running");
